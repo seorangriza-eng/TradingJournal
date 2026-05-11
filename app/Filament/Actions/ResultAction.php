@@ -3,9 +3,11 @@
 namespace App\Filament\Actions;
 
 use Filament\Actions\Action;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Notifications\Notification;
 use Filament\Support\RawJs;
 
@@ -36,6 +38,9 @@ class ResultAction extends Action
                     ->numeric()
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
+                    ->required(),
+                DateTimePicker::make('result_time')
+                    ->default(now())
                     ->required()
             ])
             ->action(function ($record, array $data): void {
@@ -43,12 +48,14 @@ class ResultAction extends Action
                 $result_img = $data['result_img'];
                 $notes = $data['notes'];
                 $saldo = $data['saldo'];
+                $result_time = $data['result_time'];
 
                 $record->update([
                     'result' => $result,
                     'result_img' => $result_img,
                     'notes' => $notes,
-                    'saldo' => $saldo
+                    'saldo' => $saldo,
+                    'result_time' => $result_time
                 ]);
 
                 if($result === 'WIN'){
@@ -62,6 +69,7 @@ class ResultAction extends Action
                         ->danger()
                         ->send();    
                 }
-            });
+            })
+            ->modalWidth('md');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Journals\Schemas;
 
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -57,7 +58,9 @@ class JournalForm
                     ->required(),
                 TextInput::make('entry_img')
                     ->label('Entry Image')
-                    ->required()
+                    ->required(),
+                Hidden::make('entry_seesion')
+                    ->dehydrated()
             ]);
     }
 }

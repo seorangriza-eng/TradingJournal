@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('hourly_img');
             $table->string('entry_tf', 5); // 1H, 30m, 15m, 5m, 1m
             $table->string('entry_img');
+            $table->string('entry_session');
             $table->string('result')->nullable(); // win, lose, be
+            $table->dateTime('result_time')->nullable();
             $table->string('result_img')->nullable();
             $table->text('notes')->nullable();
             $table->integer('saldo')->nullable();
