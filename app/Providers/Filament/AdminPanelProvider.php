@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Lime,
             ])
+            ->favicon(asset('images/favicon.svg'))
             ->userMenuItems([
                 // 'profile' => MenuItem::make()
                 //     ->label(fn() => auth()->user()->name)
