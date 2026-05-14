@@ -11,7 +11,7 @@ class StatsOverview extends StatsOverviewWidget
 {
     protected function getStats(): array
     {
-        $totalTrade = Journal::count('id');
+        $totalTrade = Journal::count('id') ?? 0;
 
         $winningTrade = Journal::where('result', 'win')->count('id');
 
