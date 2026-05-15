@@ -15,7 +15,8 @@ class ViewJournal extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            ResultAction::make(),
+            ResultAction::make()
+                ->hidden(fn ($record) => $record->result != null),
             EditAction::make(),
             DeleteAction::make(),
         ];

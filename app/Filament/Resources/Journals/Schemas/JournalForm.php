@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Journals\Schemas;
 
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -60,7 +61,22 @@ class JournalForm
                     ->label('Entry Image')
                     ->required(),
                 Hidden::make('entry_seesion')
-                    ->dehydrated()
+                    ->dehydrated(),
+                Select::make('result')
+                    ->options([
+                        'WIN' => 'WIN',
+                        'LOSE' => 'LOSE',
+                        'BE' => 'BREAK EVEN'
+                    ])
+                    ->visibleOn('edit'),
+                DateTimePicker::make('result_time')
+                    ->visibleOn('edit'),
+                TextInput::make('result_img')
+                    ->visibleOn('edit'),
+                Textarea::make('notes')
+                    ->visibleOn('edit'),
+                TextInput::make('saldo')
+                    ->visibleOn('edit')
             ]);
     }
 }

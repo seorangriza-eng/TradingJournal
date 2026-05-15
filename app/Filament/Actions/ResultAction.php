@@ -7,7 +7,6 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TimePicker;
 use Filament\Notifications\Notification;
 use Filament\Support\RawJs;
 
@@ -24,7 +23,7 @@ class ResultAction extends Action
                     ->options([
                         'WIN' => 'WIN',
                         'LOSE' => 'LOSE',
-                        'BE' => 'BE'
+                        'BE' => 'BREAK EVEN'
                     ])
                     ->default('WIN')
                     ->inline()

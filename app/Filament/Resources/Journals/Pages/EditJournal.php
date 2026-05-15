@@ -15,7 +15,8 @@ class EditJournal extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ResultAction::make(),
+            ResultAction::make()
+                ->hidden(fn ($record) => $record->result != null),
             DeleteAction::make(),
         ];
     }

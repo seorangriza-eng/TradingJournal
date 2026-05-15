@@ -71,7 +71,8 @@ class JournalsTable
             ])
             ->recordActions([
                 ActionGroup::make([
-                    ResultAction::make(),
+                    ResultAction::make()
+                        ->hidden(fn ($record) => $record->result != null),
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),

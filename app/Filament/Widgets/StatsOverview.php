@@ -11,15 +11,20 @@ class StatsOverview extends StatsOverviewWidget
 {
     protected function getStats(): array
     {
-        $totalTrade = Journal::count('id') ?? 0;
+        $stats = Journal::selectRaw("
+            COUNT(id) as total,
+            COUNT(CASE WHEN result = 'win' THEN 1 END) as win,
+            COUNT(CASE WHEN result = 'lose' THEN 1 END) as lose,
+            COUNT(CASE WHEN result = 'be' THEN 1 END) as be
+        ")->first();
 
-        $winningTrade = Journal::where('result', 'win')->count('id');
+        $totalTrade = $stats->total ?? 0;
+        $winningTrade = $stats->win ?? 0;
+        $losingTrade = $stats->lose ?? 0;
+        $beTrade = $stats->be ?? 0;
 
-        $losingTrade = Journal::where('result', 'lose')->count('id');
-
-        $beTrade = Journal::where('result', 'be')->count('id');
-
-        $winRate = round((($winningTrade / $totalTrade) * 100), 2) ?? 0;
+        // Proteksi division by zero
+        $winRate = $totalTrade > 0 ? round((($winningTrade / $totalTrade) * 100), 2) : 0;
 
         return [
             Stat::make('Winning Trade', $winningTrade),
